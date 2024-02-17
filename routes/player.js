@@ -5,7 +5,6 @@ var teamHelper=require('../helpers/team-helper');
 // edited by Underemployed 17-02-2024
 function verifyTeam(Id){
   var isTeamId=false;
-  Id = Id.replace(/\s+/g, '').toLowerCase(); // remove all spaces
   switch (Id) {
     case "team01":
     case "team02":
@@ -43,7 +42,7 @@ function verifyTeam(Id){
 function createTeam(teamId){
   let teamDetails={}
   //teamId
-  teamDetails.teamId=teamId;
+  teamDetails.teamId=teamId.toLowerCase().trim();
   //current clue number for leaderboard
   teamDetails.currentClue=2;
   // array for track user
@@ -129,7 +128,7 @@ router.post('/clue', function(req, res) {
 
   let data = req.body
   var teamId=data.teamId
-  // teamId = teamId.toLowerCase().trim();
+  teamId = teamId.replace(/\s+/g, '').toLowerCase();
   if (verifyTeam(teamId)) {
     req.session.teamId=data.teamId
     var answer=data.answer
