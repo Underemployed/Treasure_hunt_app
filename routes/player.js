@@ -29,6 +29,7 @@ function verifyTeam(Id){
     case "team20":
     case "team21":
     case "team22":
+    case "team23":
       isTeamId=true;
       break;
     default:
