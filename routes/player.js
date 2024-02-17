@@ -2,9 +2,10 @@ var express = require('express');
 const session = require('express-session');
 var router = express.Router();
 var teamHelper=require('../helpers/team-helper');
-
+// edited by Underemployed 17-02-2024
 function verifyTeam(Id){
   var isTeamId=false;
+  Id = Id.replace(/\s+/g, '').toLowerCase(); // remove all spaces
   switch (Id) {
     case "team01":
     case "team02":
@@ -26,6 +27,8 @@ function verifyTeam(Id){
     case "team18":
     case "team19":
     case "team20":
+    case "team21":
+    case "team22":
       isTeamId=true;
       break;
     default:
@@ -216,11 +219,19 @@ router.post('/clue', function(req, res) {
           nextPageName = 'clue13'
           finalCheck(13,teamId,nextPageName,res)
           break;
+        case "zoomit":
+          nextPageName = 'clue13'
+          finalCheck(13,teamId,nextPageName,res)
+          break;
         case "library":
           nextPageName = 'clue14'
           finalCheck(14,teamId,nextPageName,res)
           break;
         case "drawing hall":
+          nextPageName = 'clue15'
+          finalCheck(15,teamId,nextPageName,res)
+          break;
+        case "drawinghall":
           nextPageName = 'clue15'
           finalCheck(15,teamId,nextPageName,res)
           break;
