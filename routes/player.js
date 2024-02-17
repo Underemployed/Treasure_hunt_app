@@ -104,6 +104,7 @@ function finalCheck(thisClueNo,teamId,nextPageName,res){
       }
     } else {
       session.errMsg = "Malpractice detected!"
+      console.log("\n"+'*'.repeat(10)+"\nMalpractice detected for team: " + teamId + " at clue " + thisClueNo + " at " + new Date().toLocaleString()+"\n"+'*'.repeat(10)+'\n'); // Log the team that did malpractice along with the current time and date
       res.redirect('/')
     }
   })
@@ -126,11 +127,12 @@ router.post('/clue', function(req, res) {
 
   let data = req.body
   var teamId=data.teamId
-  teamId = teamId.toLowerCase().trim();
+  // teamId = teamId.toLowerCase().trim();
   if (verifyTeam(teamId)) {
     req.session.teamId=data.teamId
     var answer=data.answer
     answer=answer.toLowerCase().trim();
+
     switch(answer) {
       case "dr e sreedharan":
         teamHelper.isTeam(teamId).then((result)=>{
