@@ -234,7 +234,13 @@ router.post('/clue', function(req, res) {
         case "drawing hall":
           nextPageName = 'clue15'
           finalCheck(15,teamId,nextPageName,res)
+        case "tbi":
+          nextPageName = 'clue15'
+          finalCheck(15,teamId,nextPageName,res)
           break;
+        case "drawing hall":
+          nextPageName = 'clue15'
+          finalCheck(15,teamId,nextPageName,res)
         case "drawinghall":
           nextPageName = 'clue15'
           finalCheck(15,teamId,nextPageName,res)
@@ -271,21 +277,21 @@ router.post('/clue', function(req, res) {
     res.redirect('/')
   }
 });
-
-// router.get('/leaderboard', function(req, res) {
-//   teamHelper.getAllTeamData().then((TeamData)=>{
-//     TeamData.sort((a,b)=>{
-//       return a.currentClue - b.currentClue
-//      })
-//      TeamData.reverse();
-//      var i = 1
-//      TeamData.forEach(element => {
-//       element.index=i
-//       i++;
-//     });
-//     res.render('partials/leaderboard',{layout: false,TeamData});
-//   })
-// });
+router.get('/leaderboard', function(req, res) {
+  teamHelper.getAllTeamData().then((TeamData)=>{
+    TeamData.sort((a,b)=>{
+      return a.currentClue - b.currentClue
+     })
+     TeamData.reverse();
+     var i = 1
+     TeamData.forEach(element => {
+      element.index=i
+      i++;
+      element.atTreasure = element.currentClue === 16; // Add this line
+    });
+    res.render('partials/leaderboard',{layout: false,TeamData});
+  })
+});
 
 router.get('/track', function(req, res) {
   teamHelper.getAllTeamData().then((TeamData)=>{
